@@ -1,5 +1,10 @@
-// Initialize an empty array to store tasks
-let tasks = [];
+// Initialize the tasks array from localStorage or as an empty array if nothing is stored
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+// Function to save tasks to localStorage
+function saveTasksToLocalStorage() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
 
 // Function to add a new task
 function addTask() {
@@ -20,6 +25,7 @@ function addTask() {
     
     // Add the new task to the tasks array
     tasks.push(newTask);
+    saveTasksToLocalStorage();
     
     // Confirm that the task has been added and log it to the console
     alert("Uppgift tillagd!");
@@ -89,8 +95,10 @@ function markAsDone() {
     // If the task is found, mark it as done and notify the user
     if (task) {
         task.done = true;
+        saveTasksToLocalStorage();
         alert(`Uppgift med ID ${taskId} har markerats som klar.`);
-    } else {
+    }
+    else {
         alert("Ingen uppgift med det ID:t hittades.");  // Alert if task ID is not found
     }
 }
@@ -117,11 +125,14 @@ function deleteTask() {
         // If confirmed, remove the task from the array
         if (confirmDelete) {
             tasks.splice(index, 1);
+            saveTasksToLocalStorage();
             alert(`Uppgift med ID ${taskId} har raderats.`);
-        } else {
+        }
+        else {
             alert("Radering avbröts.");  // Alert if deletion was canceled
         }
-    } else {
+    }
+    else {
         alert("Ingen uppgift med det ID:t hittades.");  // Alert if task ID is not found
     }
 }
