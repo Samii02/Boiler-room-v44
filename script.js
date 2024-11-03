@@ -31,7 +31,7 @@ function showTasks() {
         alert("Det finns inga uppgifter.")
         return;
     }
-    console.log("Uppgifter: ");
+    console.log("\nUppgifter: ");
     tasks.forEach(task => {
         console.log(`ID: ${task.id}, Beskrivning: ${task.description}, Klar: ${task.done ? "Ja" : "Nej"}`)
     })
@@ -44,14 +44,25 @@ function showTasks() {
     alert(message);
 }
 
+function showTasksInConsole() {
+    if (tasks.length === 0) {
+        alert("Det finns inga uppgifter.")
+        return;
+    }
+    console.log("\nUppgifter: ");
+    tasks.forEach(task => {
+        console.log(`ID: ${task.id}, Beskrivning: ${task.description}, Klar: ${task.done ? "Ja" : "Nej"}`)
+    })
+}
+
 function markAsDone() {
     if (tasks.length === 0) {
         alert("Det finns inga uppgifter.")
         return;
     }
     
+    showTasksInConsole();
     let taskId = prompt("Ange ID för uppgiften du vill markera som klar: ")
-
     let task = tasks.find(task => task.id === taskId)
 
     if (task) {
@@ -59,6 +70,30 @@ function markAsDone() {
         alert(`Uppgift med ID ${taskId} har markerats som klar.`);
     }
     else {
+        alert("Ingen uppgift med det ID:t hittades.");
+    }
+}
+
+function deleteTask() {
+    if (tasks.length === 0) {
+        alert("Det finns inga uppgifter.");
+        return;
+    }
+    
+    showTasksInConsole();
+    let taskId = prompt("Ange ID för uppgiften du vill radera: ");
+    let index = tasks.findIndex(task => task.id === taskId);
+    
+    if (index !== -1) {
+        let confirmDelete = confirm(`Är du säker på att du vill radera uppgiften med ID ${taskId}?`);
+        
+        if (confirmDelete) {
+            tasks.splice(index, 1);
+            alert(`Uppgift med ID ${taskId} har raderats.`);
+        } else {
+            alert("Radering avbröts.");
+        }
+    } else {
         alert("Ingen uppgift med det ID:t hittades.");
     }
 }
@@ -78,7 +113,7 @@ function showMenu() {
                 markAsDone();
                 break;
             case '4':
-                null
+                deleteTask();
                 break;
             case '5':
                 alert("Programmet avslutas.")
