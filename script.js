@@ -35,13 +35,32 @@ function showTasks() {
     tasks.forEach(task => {
         console.log(`ID: ${task.id}, Beskrivning: ${task.description}, Klar: ${task.done ? "Ja" : "Nej"}`)
     })
-    
+
     let message = "Uppgifter:\n";
     tasks.forEach(task => {
         message += `ID: ${task.id}, Beskrivning: ${task.description}, Klar: ${task.done ? "Ja" : "Nej"}\n`;
     });
 
     alert(message);
+}
+
+function markAsDone() {
+    if (tasks.length === 0) {
+        alert("Det finns inga uppgifter.")
+        return;
+    }
+    
+    let taskId = prompt("Ange ID för uppgiften du vill markera som klar: ")
+
+    let task = tasks.find(task => task.id === taskId)
+
+    if (task) {
+        task.done = true;
+        alert(`Uppgift med ID ${taskId} har markerats som klar.`);
+    }
+    else {
+        alert("Ingen uppgift med det ID:t hittades.");
+    }
 }
 
 function showMenu() {
@@ -56,7 +75,7 @@ function showMenu() {
                 showTasks();
                 break;
             case '3':
-                null
+                markAsDone();
                 break;
             case '4':
                 null
