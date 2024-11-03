@@ -31,17 +31,13 @@ function showTasks() {
         alert("Det finns inga uppgifter.")
         return;
     }
-    console.log("\nUppgifter: ");
-    tasks.forEach(task => {
-        console.log(`ID: ${task.id}, Beskrivning: ${task.description}, Klar: ${task.done ? "Ja" : "Nej"}`)
-    })
-
     let message = "Uppgifter:\n";
     tasks.forEach(task => {
         message += `ID: ${task.id}, Beskrivning: ${task.description}, Klar: ${task.done ? "Ja" : "Nej"}\n`;
     });
-
     alert(message);
+
+    showTasksInConsole();    
 }
 
 function showTasksInConsole() {
