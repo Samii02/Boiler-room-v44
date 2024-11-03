@@ -26,6 +26,17 @@ function generateId() {
     return id;
 }
 
+function showTasks() {
+    if (tasks.length === 0) {
+        alert("Det finns inga uppgifter.")
+        return;
+    }
+    console.log("Uppgifter: ");
+    tasks.forEach(task => {
+        console.log(`ID: ${task.id}, Beskrivning: ${task.description}, Klar: ${task.done ? "Ja" : "Nej"}`)
+    })
+}
+
 function showMenu() {
     let choice;
     do {
@@ -35,7 +46,7 @@ function showMenu() {
                 addTask();
                 break;
             case '2':
-                null;
+                showTasks();
                 break;
             case '3':
                 null
@@ -46,6 +57,8 @@ function showMenu() {
             case '5':
                 alert("Programmet avslutas.")
                 break;
+            default:
+                alert("Mata in ett av förslagen!")
         }
     }
     while (choice !== '5');
